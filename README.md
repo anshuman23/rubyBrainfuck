@@ -1,9 +1,12 @@
-# rubyBrainfuck
-- copyright Anshuman Chhabra (2016)
-A simple and inelegant interactive interpreter for Brainfuck written in Ruby
+rubyBrainfuck 
+=============
+
+###### copyright Anshuman Chhabra (2016)
+
+- A simple and inelegant interactive interpreter for Brainfuck written in Ruby
 
 - Brainfuck is an esoteric language with only 8 operators =>
- # < > . , + - [ ] 
+ ### < > . , + - [ ] 
 
 - This Ruby script can be used as an interactive interpreter for the same. 
 
