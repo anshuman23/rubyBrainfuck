@@ -5,78 +5,54 @@ require 'io/console'
 
 $arr = Hash.new(0)
 $indexer = 0
-  
-def init
- $arr = [0]
- $indexer = 0
 
+def init
+  $arr = [0]
+  $indexer = 0
 end
+
 
 def op1
   #puts "<"
-   # global indexer
   if($indexer<=0)
     puts "Seg fault"
-    
   end
 
- $indexer = $indexer - 1
-
+  $indexer = $indexer - 1
 end
+
 
 def op2
   #puts ">"
-    #global indexer
- if($indexer >=(30000-1) )
-   puts "Seg fault"
-   
+  if($indexer >=(30000-1) )
+    puts "Seg fault"
   end
 
   $indexer = $indexer + 1
-  
 end
+
 
 def subtractor
- # puts"in subtrctr"
-  #global indexer
-  #if($arr[$indexer] >= 1)
-   # $arr[$indexer] = $arr[$indexer] - 1
-
- # else $arr[$indexer] = 255
-
   $arr[$indexer] = ($arr[$indexer] - 1) % 256
-#print $arr[$indexer]  
-  #end
 end
 
+
 def adder
-  #puts "in adder"
-  #global indexer
-
-  #if($arr[$indexer] <= 254 )
-   # $arr[$indexer] = $arr[$indexer] + 1
-
-  #else $arr[$indexer] = 0
-  # end
   $arr[$indexer] = ($arr[$indexer] + 1) % 256
- # print $arr[$indexer]
 end
 
 def read
-#puts "in read"
-  #global indexer
   print $arr[$indexer].chr
-  
 end
 
+
 def write
-#puts "in write"  
- # global indexer
   input = STDIN.getch
   if( (input.ord) != 26 )
     $arr[$indexer] = input.ord
   end
 end
+
 
 def parse(code)
 
@@ -93,9 +69,9 @@ def parse(code)
     elsif(c.chr == "]")
 
       begin
-      
-      b = opening.pop
-      loop[b] = index
+        
+        b = opening.pop
+        loop[b] = index
 
       rescue
         puts "Error1. Mismatch of [ ] operators"
@@ -122,20 +98,13 @@ end
 
 def eval(code)
 
- #global indexer
-
-
-  
   loop = parse(code)
-  
-
   counter = 0
-
   store = Array.new
 
   
   while(counter< code.length)
- # code.each_byte do|c|
+    # code.each_byte do|c|
 
     op = code[counter]
     
@@ -157,7 +126,7 @@ def eval(code)
 
     elsif(op == "-")
       subtractor
-                        
+      
 
     elsif (op == "[")
 
@@ -166,7 +135,7 @@ def eval(code)
         
 
       else counter = loop[counter]
-       
+        
 
       end
 
@@ -202,23 +171,23 @@ Press '&' key to hit ENTER
 
     inputted = STDIN.getch
     puts inputted
-        
     
-      
+    
+    
 
     if(inputted == "~")
 
-      # begin
-            
-      eval(code)
+      begin
+        
+        eval(code)
 
-      #rescue
-       # puts"Error! Aborting... Try again."
-       # return
+      rescue
+        puts"Error! Aborting... Try again."
+        return
 
-      #end
+      end
 
-    
+      
     elsif(inputted == "@")
       exit
 
@@ -232,9 +201,7 @@ Press '&' key to hit ENTER
   end
 
 end
-      
 
 
-#eval("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.")
-    
+
 interactor
