@@ -33,12 +33,12 @@ end
 
 
 def subtractor
-  $arr[$indexer] = ($arr[$indexer] - 1) % 256
+  $arr[$indexer] = ($arr[$indexer] - 1) 
 end
 
 
 def adder
-  $arr[$indexer] = ($arr[$indexer] + 1) % 256
+  $arr[$indexer] = ($arr[$indexer] + 1) 
 end
 
 def read
@@ -48,20 +48,18 @@ end
 
 def write
   input = STDIN.getch
-  if( (input.ord) != 26 )
-    $arr[$indexer] = input.ord
-  end
+  $arr[$indexer] = input.ord
 end
 
 
-def parse(code)
+def processIndeces(codeString)
 
   opening = Array.new
-  loop = Hash.new
+  keeper = Hash.new
 
   index = 0
 
-  code.each_byte do|c|
+  codeString.each_byte do|c|
 
     if(c.chr == "[")
       opening.push(index)
@@ -71,7 +69,7 @@ def parse(code)
       begin
         
         b = opening.pop
-        loop[b] = index
+        keeper[b] = index
 
       rescue
         puts "Error1. Mismatch of [ ] operators"
@@ -88,7 +86,7 @@ def parse(code)
   if(!(opening.empty?))
     puts "Error2. Mismatch of [ ] operators"
 
-  else return loop
+  else return keeper
   end
 
 end
@@ -96,17 +94,17 @@ end
 
 
 
-def eval(code)
+def eval(codeString)
 
-  loop = parse(code)
+  keeper = processIndeces(codeString)
   counter = 0
   store = Array.new
 
   
-  while(counter< code.length)
+  while(counter< codeString.length)
     # code.each_byte do|c|
 
-    op = code[counter]
+    op = codeString[counter]
     
 
     if(op == "." )
@@ -134,7 +132,7 @@ def eval(code)
         store.push(counter)
         
 
-      else counter = loop[counter]
+      else counter = keeper[counter]
         
 
       end
@@ -165,21 +163,18 @@ Type ^ (Spaced out from code) to reinitialize the values of the BF tape and poin
 Press '&' key to hit ENTER
 > "
 
-  code = ""
+  codeString = ""
 
   while(true)
 
     inputted = STDIN.getch
     puts inputted
-    
-    
-    
 
     if(inputted == "~")
 
       begin
         
-        eval(code)
+        eval(codeString)
 
       rescue
         puts"Error! Aborting... Try again."
@@ -194,7 +189,7 @@ Press '&' key to hit ENTER
     elsif(inputted == "^")
       init
 
-    else code.concat(inputted)
+    else codeString.concat(inputted)
 
     end
 
