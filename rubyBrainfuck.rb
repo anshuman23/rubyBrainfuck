@@ -12,46 +12,6 @@ def init
 end
 
 
-def op1
-  #puts "<"
-  if($indexer<=0)
-    puts "Seg fault"
-  end
-
-  $indexer = $indexer - 1
-end
-
-
-def op2
-  #puts ">"
-  if($indexer >=(30000-1) )
-    puts "Seg fault"
-  end
-
-  $indexer = $indexer + 1
-end
-
-
-def subtractor
-  $arr[$indexer] = ($arr[$indexer] - 1) 
-end
-
-
-def adder
-  $arr[$indexer] = ($arr[$indexer] + 1) 
-end
-
-def read
-  print $arr[$indexer].chr
-end
-
-
-def write
-  input = STDIN.getch
-  $arr[$indexer] = input.ord
-end
-
-
 def processIndeces(codeString)
 
   opening = Array.new
@@ -108,22 +68,35 @@ def eval(codeString)
     
 
     if(op == "." )
-      read
+      print $arr[$indexer].chr
       
     elsif(op == ",")
-      write
+      input = STDIN.getch
+      $arr[$indexer] = input.ord
+
 
     elsif(op == "<")
-      op1
+
+      if($indexer<=0)
+        puts "Seg fault"
+      end
+
+      $indexer = $indexer - 1
+
 
     elsif(op == ">")
-      op2
+
+      if($indexer >=(30000-1) )
+        puts "Seg fault"
+      end
+
+      $indexer = $indexer + 1
 
     elsif(op == "+")
-      adder
+      $arr[$indexer] = ($arr[$indexer] + 1)
 
     elsif(op == "-")
-      subtractor
+      $arr[$indexer] = ($arr[$indexer] - 1)
       
 
     elsif (op == "[")
